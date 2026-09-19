@@ -4,6 +4,7 @@
 #include <unistd.h> // For nanosleep() and timespec
 #include <string.h> // For strlen()
 #include <stddef.h> // For size_t
+#include <signal.h>
 
 /*
  * POFSS matrix - distributed under the BSD 3-Clause license.
@@ -18,7 +19,16 @@ struct timespec sleep_time = {
     .tv_nsec = MS_TO_NS(10) // 100 millisecond delay before the next character is printed.
 };
 
+void cleanup(int sig) { // Cleanup routine
+    printf("\033[0m\n");
+    fflush(stdout);
+    exit(0);
+}
+
 int main(void) {
+
+    signal(SIGINT, cleanup); // Make sure the program turns the terminal colour back to the default one when doing ^C.
+
     srand(time(NULL)); // Generate the pseudo-random algorithm's seed using the current time since 01/01/1970.
 
     printf("\x1B[32;40m"); // Set the colour to green for that "matrix" effect.
