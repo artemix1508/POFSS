@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 
     }
 
-    if (strcmp(argv[1], "-h") == 0) {
+    if (strcmp(argv[1], "-h") == 0) { // Show help
 	    printf("POFSS Librepkg\n");
 	    printf(" -r - direct data fetch\n");
 	    printf(" -g - clone a git repository from https://github.com/\n");
