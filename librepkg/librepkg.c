@@ -14,6 +14,17 @@
 
 int main(int argc, char **argv)
 {
+    if (argc == 2) { // Make help work with no 3rd argument
+        if (strcmp(argv[1], "-h") == 0) { // Show help
+            printf("POFSS Librepkg\n");
+            printf(" -r - direct data fetch\n");
+            printf(" -g - clone a git repository from https://github.com/\n");
+            printf(" -h show Librepkg help\n");
+            return 0;
+        }
+        return 1;
+    }
+
     if (argc < 3) // Exit when there's not enough arguments
         return 1;
 
@@ -55,14 +66,6 @@ int main(int argc, char **argv)
 	// Only reached if execvp() fails
 	perror("execvp");
 	return 1;
-
-    }
-
-    if (strcmp(argv[1], "-h") == 0) { // Show help
-	    printf("POFSS Librepkg\n");
-	    printf(" -r - direct data fetch\n");
-	    printf(" -g - clone a git repository from https://github.com/\n");
-	    printf(" -h show Librepkg help\n");
 
     }
 
